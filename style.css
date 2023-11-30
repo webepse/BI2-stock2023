@@ -1,0 +1,12 @@
+.boite{
+    height: 100px;
+    background-color: crimson; 
+    outline: solid 1px black;
+}
+
+.sboite{
+    height: 100px;
+    background-color: purple;
+    outline: solid 1px black;
+}
+
