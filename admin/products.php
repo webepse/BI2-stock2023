@@ -35,8 +35,23 @@
             </tr>
         </thead>
         <tbody>
-            
-
+            <?php 
+                $req = $bdd->query("SELECT * FROM products");
+                while($don = $req->fetch())
+                {
+                    echo "<tr>";
+                        echo "<td>".$don['id']."</td>";
+                        echo "<td>".$don['nom']."</td>";
+                        echo "<td>".$don['categorie']."</td>";
+                        echo "<td>".$don['prix']."</td>";
+                        echo "<td>";
+                            echo "<a href='#' class='btn btn-warning'>Modifier</a>";
+                            echo "<a href='#' class='btn btn-danger'>Supprimer</a>";
+                        echo "</td>";
+                    echo "</tr>";
+                }
+                $req->closeCursor();
+            ?>
         </tbody>
      </table>
     </div>
