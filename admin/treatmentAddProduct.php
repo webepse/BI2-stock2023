@@ -58,8 +58,14 @@
         if($error==0)
         {
             // insertion dans la bdd
+            require "../connexion.php";
+            $insert = $bdd->prepare("INSERT INTO products(nom,categorie,fichier,description,date,prix) VALUES(?,?,?,?,?,?)");
+            $insert->execute([$nom,$categorie,$fichier,$description,$date,$prix]);
+            $insert->closeCursor();
+            header("LOCATION:products.php?add=success");
         }else{
             // redirection vers le formulaire en indiquant l'erreur
+            header("LOCATION:addProduct.php?error=".$error);
         }
 
 

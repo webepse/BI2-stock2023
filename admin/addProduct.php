@@ -5,7 +5,6 @@
         header("LOCATION:../403.php");
     }
 
-    require "../connexion.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,6 +23,12 @@
     <div class="container">
         <h2>Ajouter un produit</h2>
         <a href="products.php" class='btn btn-secondary'>Retour</a>
+        <?php
+            if(isset($_GET['error']))
+            {
+                echo "<div class='alert alert-danger my-3'>Une erreur est survenue (code erreur: ".$_GET['error']." )</div>";
+            }
+        ?>
         <form action="treatmentAddProduct.php" method="POST">
             <div class="form-group my-3">
                 <label for="nom">Nom du produit: </label>

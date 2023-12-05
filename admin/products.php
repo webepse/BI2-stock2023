@@ -24,6 +24,12 @@
     <div class="container-fluid">
      <h2>Gestion des produits</h2>
      <a href="addProduct.php" class="btn btn-primary">Ajouter un produit</a>
+     <?php 
+        if(isset($_GET['add']))
+        {
+            echo "<div class='alert alert-success'>Vous avez bien ajouté un produit à votre base de données</div>";
+        }
+    ?>
      <table class="table table-striped">
         <thead>
             <tr>
