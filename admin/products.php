@@ -6,6 +6,33 @@
     }
 
     require "../connexion.php";
+
+    // si il y a dans l'url delete
+    if(isset($_GET['delete']))
+    {
+        // vérifier si l'id qu'on m'a donné existe vraiment 
+        $reqdel = $bdd->prepare("SELECT * FROM products WHERE id=?");
+        $reqdel->execute([$_GET['delete']]);
+        if(!$dondel = $reqdel->fetch())
+        {
+            // fermer la requête
+            $reqdel->closeCursor();
+            // rediriger vers la page product sans delete
+            header("LOCATION:products.php");
+        }
+
+        // il y a bien une correspondance donc on ferme la requête
+        $reqdel->closeCursor();
+
+        // supprimer le produit 
+        $delete = $bdd->prepare("DELETE FROM products WHERE id=?");
+        $delete->execute([$_GET['delete']]);
+        $delete->closeCursor();
+        header("LOCATION:products.php?delsuccess=".$_GET['delete']);
+
+
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +54,11 @@
      <?php 
         if(isset($_GET['add']))
         {
-            echo "<div class='alert alert-success'>Vous avez bien ajouté un produit à votre base de données</div>";
+            echo "<div class='alert alert-success my-3'>Vous avez bien ajouté un produit à votre base de données</div>";
+        }
+        if(isset($_GET['delsuccess']))
+        {
+            echo "<div class='alert alert-danger my-3'>Vous avez bien supprimé le produit n°".$_GET['delsuccess']."</div>";
         }
     ?>
      <table class="table table-striped">
@@ -52,7 +83,7 @@
                         echo "<td>".$don['prix']."</td>";
                         echo "<td>";
                             echo "<a href='#' class='btn btn-warning'>Modifier</a>";
-                            echo "<a href='#' class='btn btn-danger'>Supprimer</a>";
+                            echo "<a href='products.php?delete=".$don['id']."' class='btn btn-danger'>Supprimer</a>";
                         echo "</td>";
                     echo "</tr>";
                 }
