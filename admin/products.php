@@ -60,6 +60,10 @@
         {
             echo "<div class='alert alert-danger my-3'>Vous avez bien supprimé le produit n°".$_GET['delsuccess']."</div>";
         }
+        if(isset($_GET['update']))
+        {
+            echo "<div class='alert alert-warning my-3'>Vous avez bien modifié le produit n°".$_GET['update']."</div>";
+        }
     ?>
      <table class="table table-striped">
         <thead>
@@ -82,7 +86,7 @@
                         echo "<td>".$don['categorie']."</td>";
                         echo "<td>".$don['prix']."</td>";
                         echo "<td>";
-                            echo "<a href='#' class='btn btn-warning'>Modifier</a>";
+                            echo "<a href='updateProduct.php?id=".$don['id']."' class='btn btn-warning'>Modifier</a>";
                             echo "<a href='products.php?delete=".$don['id']."' class='btn btn-danger'>Supprimer</a>";
                         echo "</td>";
                     echo "</tr>";
