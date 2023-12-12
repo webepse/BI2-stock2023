@@ -1,3 +1,8 @@
+<?php 
+    require "connexion.php";
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +18,20 @@
         <h1>hello world</h1>
         
         <div class="row">
-            <div class="col-lg-5 col-12 col-sm-10 boite"></div>
-            <div class="col-lg-7 col-10 col-sm-2 boite"></div>
-          </div>
+            <?php
+                $req = $bdd->query("SELECT * FROM products");
+                while($don = $req->fetch())
+                {
+                     echo "<div class='col-md-3'>";
+                        echo "<img src='images/".$don['fichier']."' class='img-fluid' />";
+                        echo "<div class='title'>".$don['nom']."</div>";
+                     echo "</div>";
+                }
+                $req->closeCursor();
+
+            ?>
+        </div>
+
     </div>
 
 </body>
