@@ -73,20 +73,20 @@
                 $fichier = strtr($fichier, 
                 'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
                 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
-            $fichier = preg_replace('/([^.a-z0-9]+)/i','-',$fichier); 
-            $fichiercptl = rand().$fichier; 
+                $fichier = preg_replace('/([^.a-z0-9]+)/i','-',$fichier); 
+                $fichiercptl = rand().$fichier; 
 
-            if(move_uploaded_file($_FILES['fichier']['tmp_name'], $dossier.$fichiercptl))
-            {
-                   // insertion dans la bdd
-                require "../connexion.php";
-                $insert = $bdd->prepare("INSERT INTO products(nom,categorie,fichier,description,date,prix) VALUES(?,?,?,?,?,?)");
-                $insert->execute([$nom,$categorie,$fichiercptl,$description,$date,$prix]);
-                $insert->closeCursor();
-                header("LOCATION:products.php?add=success");
-            }else{
-                header("LOCATION:addProduct.php?errorimg=4");
-            }
+                if(move_uploaded_file($_FILES['fichier']['tmp_name'], $dossier.$fichiercptl))
+                {
+                    // insertion dans la bdd
+                    require "../connexion.php";
+                    $insert = $bdd->prepare("INSERT INTO products(nom,categorie,fichier,description,date,prix) VALUES(?,?,?,?,?,?)");
+                    $insert->execute([$nom,$categorie,$fichiercptl,$description,$date,$prix]);
+                    $insert->closeCursor();
+                    header("LOCATION:products.php?add=success");
+                }else{
+                    header("LOCATION:addProduct.php?errorimg=4");
+                }
 
             }else{
                 header("LOCATION:addProduct.php?errorimg=".$error);

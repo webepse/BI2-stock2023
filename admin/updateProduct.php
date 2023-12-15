@@ -50,7 +50,7 @@
                 echo "<div class='alert alert-danger my-3'>Une erreur est survenue (code erreur: ".$_GET['error']." )</div>";
             }
         ?>
-        <form action="treatmentUpdateProduct.php?id=<?= $don['id'] ?>" method="POST">
+        <form action="treatmentUpdateProduct.php?id=<?= $don['id'] ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group my-3">
                 <label for="nom">Nom du produit: </label>
                 
@@ -87,8 +87,11 @@
                 <input type="date" name="date" id="date" class="form-control" value="<?= $don['date'] ?>">
             </div>
             <div class="form-group my-3">
+                <div class="col-4">
+                    <img src="../images/<?= $don['fichier'] ?>" alt="image de <?= $don['nom'] ?>" class="img-fluid">
+                </div>
                 <label for="fichier">Fichier: </label>
-                <input type="text" name="fichier" id="fichier" class="form-control" value="<?= $don['fichier'] ?>">
+                <input type="file" name="fichier" id="fichier" class="form-control">
             </div>
             <div class="form-group my-3">
                 <label for="prix">Prix: </label>
