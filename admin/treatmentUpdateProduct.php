@@ -59,13 +59,6 @@
             $date = htmlspecialchars($_POST['date']);
         }
 
-        if(empty($_POST['fichier']))
-        {
-            $error = 5;
-        }else{
-            $fichier = htmlspecialchars($_POST['fichier']);
-        }
-
         if(empty($_POST['prix']))
         {
             $error = 6;
@@ -76,11 +69,71 @@
 
         if($error==0)
         {
-            // modification dans la bdd
-            $update = $bdd->prepare("UPDATE products SET nom=?, categorie=?, description=?, date=?, prix=? WHERE id=?");
-            $update->execute([$nom, $categorie, $description, $date, $prix, $id]);
-            $update->closeCursor();
-            header("LOCATION:products.php?update=".$id);
+            if(empty($_FILES['fichier']['tmp_name']))
+            {
+                 // // modification dans la bdd
+                $update = $bdd->prepare("UPDATE products SET nom=?, categorie=?, description=?, date=?, prix=? WHERE id=?");
+                $update->execute([$nom, $categorie, $description, $date, $prix, $id]);
+                $update->closeCursor();
+                header("LOCATION:products.php?update=".$id);
+            }else{
+                // vérifier le nouveau fichier
+                // ok - traitement du ou des fichier(s)
+                $dossier = "../images/"; // ../images/monfichier.jpg
+                $fichier = basename($_FILES['fichier']['name']);
+                $taille_maxi = 2000000;
+                $taille = filesize($_FILES['fichier']['tmp_name']);
+                $extensions = ['.png','.jpg','.jpeg', '.gif'];
+                $extension = strrchr($_FILES['fichier']['name'],'.');
+
+                if(!in_array($extension, $extensions))
+                {
+                    $error = 2;
+                }
+                
+                if($taille>$taille_maxi){
+                    $error = 3;
+                }
+
+                  // test si le fichier correspond à nos attentes
+                if($error == 0)
+                {
+                    $fichier = strtr($fichier, 
+                    'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
+                    'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
+                    $fichier = preg_replace('/([^.a-z0-9]+)/i','-',$fichier); 
+                    $fichiercptl = rand().$fichier; 
+
+                    if(move_uploaded_file($_FILES['fichier']['tmp_name'], $dossier.$fichiercptl))
+                    {
+                        // supprimer l'ancien fichier si le nouveau est ok 
+                        unlink("../images/".$don['fichier']);
+
+                        // modification (update) dans la base de données
+
+                        $update = $bdd->prepare("UPDATE products SET nom=?, categorie=?, description=?, date=?, prix=?, fichier=? WHERE id=?");
+                        $update->execute([$nom, $categorie, $description, $date, $prix,$fichiercptl,$id]);
+                        $update->closeCursor();
+                        header("LOCATION:products.php?update=".$id);
+                    }else{
+                        header("LOCATION:addProduct.php?errorimg=4");
+                    }
+
+                }else{
+                    header("LOCATION:updateProduct.php?id=".$id."&errorimg=".$error);
+                }
+
+
+                
+                
+            }
+
+
+            // // modification dans la bdd
+            // $update = $bdd->prepare("UPDATE products SET nom=?, categorie=?, description=?, date=?, prix=? WHERE id=?");
+            // $update->execute([$nom, $categorie, $description, $date, $prix, $id]);
+            // $update->closeCursor();
+            // header("LOCATION:products.php?update=".$id);
         }else{
             // redirection vers le formulaire en indiquant l'erreur
             header("LOCATION:updateProduct.php?id=".$id."&error=".$error);
