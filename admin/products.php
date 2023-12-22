@@ -23,6 +23,9 @@
 
         // il y a bien une correspondance donc on ferme la requête
         $reqdel->closeCursor();
+        
+        // supprimer l'image
+        unlink("../images/".$dondel['fichier']);
 
         // supprimer le produit 
         $delete = $bdd->prepare("DELETE FROM products WHERE id=?");

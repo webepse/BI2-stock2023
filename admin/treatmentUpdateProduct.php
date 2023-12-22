@@ -121,19 +121,8 @@
 
                 }else{
                     header("LOCATION:updateProduct.php?id=".$id."&errorimg=".$error);
-                }
-
-
-                
-                
+                }     
             }
-
-
-            // // modification dans la bdd
-            // $update = $bdd->prepare("UPDATE products SET nom=?, categorie=?, description=?, date=?, prix=? WHERE id=?");
-            // $update->execute([$nom, $categorie, $description, $date, $prix, $id]);
-            // $update->closeCursor();
-            // header("LOCATION:products.php?update=".$id);
         }else{
             // redirection vers le formulaire en indiquant l'erreur
             header("LOCATION:updateProduct.php?id=".$id."&error=".$error);
