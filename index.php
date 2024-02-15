@@ -31,6 +31,36 @@
 
             ?>
         </div>
+        <div class="row">
+                <div class="col-6 offset-3">
+                    <form action="traitement.php" method="POST">
+                        <div class="form-group my-3">
+                            <label for="nom">Nom: </label>
+                            <input type="text" id="nom" name="nom" class="form-control">
+                        </div>
+                        <div class="form-group my-3">
+                            <label for="email">Adresse E-mail: </label>
+                            <input type="email" name="email" id="email" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="sujet">Sujet</label>
+                            <select name="sujet" id="sujet" class="form-control">
+                                <option value="sujet 1">Sujet 1</option>
+                                <option value="sujet 2">Sujet 2</option>
+                                <option value="sujet 3">Sujet 3</option>
+                                <option value="sujet 4">Sujet 4</option>
+                            </select>
+                        </div>
+                        <div class="form-group my-3">
+                            <label for="message">Message: </label>
+                            <textarea name="message" id="message" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group my-3">
+                            <input type="submit" value="Envoyer" class="btn btn-success">
+                        </div>
+                    </form>
+                </div>
+        </div>
 
     </div>
 
