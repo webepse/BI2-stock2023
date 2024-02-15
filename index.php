@@ -19,7 +19,7 @@
         
         <div class="row">
             <?php
-                $req = $bdd->query("SELECT * FROM products");
+                $req = $bdd->query("SELECT * FROM products ORDER BY id ASC");
                 while($don = $req->fetch())
                 {
                      echo "<div class='col-md-3'>";

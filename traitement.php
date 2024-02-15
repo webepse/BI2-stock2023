@@ -1,5 +1,5 @@
 <?php 
-
+// mon formulaire a été envoyé ou non
 if(isset($_POST['nom']))
 {
 
@@ -33,8 +33,10 @@ if(isset($_POST['nom']))
         $message = htmlspecialchars($_POST['message']);
     }
 
+    // s'il y a eu une erreur dans le formulaire -> oui ou non
     if($err==0)
     {
+        // pas d'erreur -> insertion dans la base de données
         require "connexion.php";
         $insert = $bdd->prepare("INSERT INTO contact(nom,email,sujet,message,date) VALUES(:nom,:email,:sujet,:message,NOW())");
         $insert->execute([
@@ -46,11 +48,13 @@ if(isset($_POST['nom']))
         $insert->closeCursor();
         header("LOCATION:index.php?message=success");
     }else{
+        // redirige vers le formulaire avec l'erreur en GET
         header("LOCATION:index.php?error=".$err);
     }
 
 
 }else{
+    // tu ne viens pas de mon formulaire -> redirection
     header("LOCATION:index.php");
 }
 
