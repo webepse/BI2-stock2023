@@ -45,6 +45,10 @@
     <div class="container">
         <h2>Message de <?= $don['nom'] ?></h2>
         <h5>Envoyé le <?= $don['mydate'] ?></h5>
+        <div>Sujet: <?= $don['sujet'] ?></div>
+        <div><?= nl2br($don['message']) ?></div>
+        <a href="mailto:<?= $don['email'] ?>" class="btn btn-success">Répondre</a>
+        <a href='contact.php' class="btn btn-secondary ms-2">Retour</a>
     </div>
     <?php 
         // insertion du footer
