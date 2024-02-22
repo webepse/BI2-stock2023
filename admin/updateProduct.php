@@ -51,55 +51,99 @@
             }
         ?>
         <form action="treatmentUpdateProduct.php?id=<?= $don['id'] ?>" method="POST" enctype="multipart/form-data">
-            <div class="form-group my-3">
-                <label for="nom">Nom du produit: </label>
-                
-                <input type="text" id="nom" name="nom" value="<?= $don['nom'];?>" class="form-control">
-            </div>
-            <div class="form-group my-3">
-                <label for="categorie">Catégorie: </label>
-                <select name="categorie" id="categorie" class="form-control">
-                    <?php
-                        if($don['categorie'] == "categorie1")
-                        {
-                            echo '<option value="categorie1" selected>Catégorie 1</option>';
-                            echo '<option value="categorie2">Catégorie 2</option>';
-                            echo '<option value="categorie3">Catégorie 3</option>';
-                        }else if($don['categorie'] == "categorie2")
-                        {
-                            echo '<option value="categorie1">Catégorie 1</option>';
-                            echo '<option value="categorie2" selected>Catégorie 2</option>';
-                            echo '<option value="categorie3">Catégorie 3</option>';
-                        }else{
-                            echo '<option value="categorie1">Catégorie 1</option>';
-                            echo '<option value="categorie2">Catégorie 2</option>';
-                            echo '<option value="categorie3" selected>Catégorie 3</option>';
-                        }
-                    ?>
-                </select>
-            </div>
-            <div class="form-group my-3">
-                <label for="description">Description: </label>
-                <textarea name="description" id="description" class="form-control"><?= $don['description'] ?></textarea>
-            </div>
-            <div class="form-group my-3">
-                <label for="date">Date: </label>
-                <input type="date" name="date" id="date" class="form-control" value="<?= $don['date'] ?>">
-            </div>
-            <div class="form-group my-3">
-                <div class="col-4">
-                    <img src="../images/<?= $don['fichier'] ?>" alt="image de <?= $don['nom'] ?>" class="img-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group my-3">
+                        <label for="nom">Nom du produit: </label>
+                        
+                        <input type="text" id="nom" name="nom" value="<?= $don['nom'];?>" class="form-control">
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="categorie">Catégorie: </label>
+                        <select name="categorie" id="categorie" class="form-control">
+                            <?php
+                                if($don['categorie'] == "categorie1")
+                                {
+                                    echo '<option value="categorie1" selected>Catégorie 1</option>';
+                                    echo '<option value="categorie2">Catégorie 2</option>';
+                                    echo '<option value="categorie3">Catégorie 3</option>';
+                                }else if($don['categorie'] == "categorie2")
+                                {
+                                    echo '<option value="categorie1">Catégorie 1</option>';
+                                    echo '<option value="categorie2" selected>Catégorie 2</option>';
+                                    echo '<option value="categorie3">Catégorie 3</option>';
+                                }else{
+                                    echo '<option value="categorie1">Catégorie 1</option>';
+                                    echo '<option value="categorie2">Catégorie 2</option>';
+                                    echo '<option value="categorie3" selected>Catégorie 3</option>';
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="date">Date: </label>
+                        <input type="date" name="date" id="date" class="form-control" value="<?= $don['date'] ?>">
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="description">Description: </label>
+                        <textarea name="description" id="description" class="form-control"><?= $don['description'] ?></textarea>
+                    </div> 
                 </div>
-                <label for="fichier">Fichier: </label>
-                <input type="file" name="fichier" id="fichier" class="form-control">
-            </div>
-            <div class="form-group my-3">
-                <label for="prix">Prix: </label>
-                <input type="number" name="prix" id="prix" step="0.01" class="form-control" value="<?= $don['prix'] ?>">
-            </div>
-            <div class="form-group my-3">
-                <input type="submit" value="Modifier" class="btn btn-warning">
-            </div>
+                <div class="col-md-6">
+                    <div class="form-group my-3">
+                        <div class="col-4">
+                            <img src="../images/<?= $don['fichier'] ?>" alt="image de <?= $don['nom'] ?>" class="img-fluid">
+                        </div>
+                        <label for="fichier">Fichier: </label>
+                        <input type="file" name="fichier" id="fichier" class="form-control">
+                    </div>
+                    <div class="form-group my-3">
+                        <label for="prix">Prix: </label>
+                        <input type="number" name="prix" id="prix" step="0.01" class="form-control" value="<?= $don['prix'] ?>">
+                    </div>
+                    <div class="form-group my-3">
+                        <input type="submit" value="Modifier" class="btn btn-warning">
+                    </div>
+                </div>
+                <div class="col-md-8 offset-md-2">
+                    <h1>Galerie images</h1>
+                    <a href="addGalimg.php?id=<?= $don['id'] ?>" class='btn btn-primary'>Ajouter une image</a>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>image</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                                $gal = $bdd->prepare("SELECT * FROM images WHERE id_produit=?");
+                                $gal->execute([$id]);
+                                // tester si j'ai des images ou non
+                                $count = $gal->rowCount();
+                                if($count > 0)
+                                {
+                                    while($donGal = $gal->fetch())
+                                    {
+                                        echo "<tr>";
+                                            echo "<td>".$donGal['id']."</td>";
+                                            echo "<td><img src='../images/".$donGal['fichier']."' alt='image de galerie ".$don['nom']."' class='col-2 img-fluid'></td>";
+                                            echo "<td>";
+                                                echo "<a href='#' class='btn btn-warning me-2'>Modifier</a>";
+                                                echo "<a href='#' class='btn btn-danger'>Supprimer</a>";
+                                            echo "</td>";
+                                        echo "</tr>";
+                                    }
+                                }else{
+                                    echo "<p>Aucune images associées</p>";
+                                }
+                                $gal->closeCursor();
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
         </form>
     </div>
     <?php include('partials/footer.php'); ?>
