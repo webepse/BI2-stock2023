@@ -16,6 +16,9 @@
                     <a class="nav-link" href="contact.php">Contact</a>
                 </li>
             </ul>
+            <ul class="ms-auto navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="dashboard.php?deco=ok">Déconnexion</a></li>
+            </ul>
         </div>
     </div>
 </nav>

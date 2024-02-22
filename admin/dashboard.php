@@ -6,6 +6,12 @@
     }
 
     require "../connexion.php";
+
+    if(isset($_GET['deco']))
+    {
+        session_destroy();
+        header("LOCATION:index.php?deco=success");
+    }
 ?>
 
 
