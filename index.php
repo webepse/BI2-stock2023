@@ -15,24 +15,43 @@
 </head>
 <body>
     <div class="container-fluid">
-        <h1>hello world</h1>
-        
-        <div class="row">
-            <?php
-                $req = $bdd->query("SELECT * FROM products ORDER BY id ASC");
-                while($don = $req->fetch())
-                {
-                     echo "<div class='col-md-3'>";
-                        echo "<img src='images/".$don['fichier']."' class='img-fluid' />";
-                        echo "<div class='title'>".$don['nom']."</div>";
-                     echo "</div>";
-                }
-                $req->closeCursor();
-
-            ?>
+        <div class="slide" id="home">
+            <h1>hello world</h1>
+            <div class="row">
+                <?php
+                    $req = $bdd->query("SELECT * FROM products ORDER BY id ASC");
+                    while($don = $req->fetch())
+                    {
+                         echo "<div class='col-md-3'>";
+                            echo "<img src='images/".$don['fichier']."' class='img-fluid' />";
+                            echo "<div class='title'>".$don['nom']."</div>";
+                         echo "</div>";
+                    }
+                    $req->closeCursor();
+    
+                ?>
+            </div>
         </div>
-        <div class="row">
+        
+        <div class="slide" id="contact">
+           
+            <div class="row">
                 <div class="col-6 offset-3">
+                    <h2>Contact</h2>
+                    <?php
+                        if(isset($_GET['error']))
+                        {
+                            echo "<div class='alert alert-danger'>Une erreur est survenue (code erreur: ".$_GET['error'].")</div>";
+                        }
+
+                        if(isset($_GET['message']))
+                        {
+                            if($_GET['message']=="success")
+                            {
+                                echo "<div class='alert alert-success'>Votre message a bien été envoyé</div>";
+                            }
+                        }
+                    ?>
                     <form action="traitement.php" method="POST">
                         <div class="form-group my-3">
                             <label for="nom">Nom: </label>
@@ -60,7 +79,9 @@
                         </div>
                     </form>
                 </div>
+            </div>
         </div>
+        
 
     </div>
 

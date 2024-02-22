@@ -46,10 +46,10 @@ if(isset($_POST['nom']))
             ":message" => $message
         ]);
         $insert->closeCursor();
-        header("LOCATION:index.php?message=success");
+        header("LOCATION:index.php?message=success#contact");
     }else{
         // redirige vers le formulaire avec l'erreur en GET
-        header("LOCATION:index.php?error=".$err);
+        header("LOCATION:index.php?error=".$err."#contact");
     }
 
 
