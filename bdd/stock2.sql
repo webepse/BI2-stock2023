@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 22 fév. 2024 à 10:27
+-- Généré le : jeu. 22 fév. 2024 à 10:28
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.1.13
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `stock2`
 --
-CREATE DATABASE IF NOT EXISTS `stock2` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `stock2`;
 
 -- --------------------------------------------------------
 

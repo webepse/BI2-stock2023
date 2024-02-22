@@ -25,6 +25,7 @@
                          echo "<div class='col-md-3'>";
                             echo "<img src='images/".$don['fichier']."' class='img-fluid' />";
                             echo "<div class='title'>".$don['nom']."</div>";
+                            echo "<a href='show.php?id=".$don['id']."' class='btn btn-primary'>Voir plus</a>";
                          echo "</div>";
                     }
                     $req->closeCursor();
