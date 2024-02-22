@@ -8,6 +8,28 @@
 
     // connexion à la bdd
     require "../connexion.php";
+
+    if(isset($_GET['delete']))
+    {
+        // vérifier si l'id correspond bien 
+        $verif = $bdd->prepare("SELECT * FROM contact WHERE id=?");
+        $verif->execute([$_GET['delete']]);
+        $donVerif = $verif->fetch();
+        $verif->closeCursor();
+        if(!$donVerif)
+        {
+            header('LOCATION:contact.php?delerror='.$_GET['delete']);
+        }else{
+            // je peux supprimer le message 
+            $delete = $bdd->prepare("DELETE FROM contact WHERE id=?");
+            $delete->execute([$_GET['delete']]);
+            $delete->closeCursor();
+            header("LOCATION:contact.php?delsuccess=".$_GET['delete']);
+        }
+   
+
+
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,7 +46,21 @@
         include("partials/header.php");
     ?>
     <div class="container-fluid">
-     <h2>Gestion des produits</h2>
+     <h2>Gestion des contact</h2>
+    <?php
+        if(isset($_GET['delerror']))
+        {
+            echo "<div class='alert alert-danger'>Une erreur est survenue lors de la suppression de l'id: ".$_GET['delerror']."</div>";
+        }
+
+        if(isset($_GET['delsuccess']))
+        {
+            echo "<div class='alert alert-success'>le message id n°".$_GET['delsuccess']." a bien été supprimé</div>";
+        }
+
+
+
+    ?>
     <table class="table table-striped">
         <thead>
             <tr>
@@ -47,7 +83,7 @@
                         echo "<td>".$donContact['mydate']."</td>";
                         echo "<td>";
                             echo "<a href='showContact.php?id=".$donContact['id']."' class='btn btn-success'>Afficher</a>";
-                            echo "<a href='#' class='btn btn-danger ms-2'>Supprimer</a>";
+                            echo "<a href='contact.php?delete=".$donContact['id']."' class='btn btn-danger ms-2'>Supprimer</a>";
                         echo "</td>";
                     echo "</tr>";
                 }
