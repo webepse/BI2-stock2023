@@ -43,6 +43,12 @@
     ?>
     <div class="container slide">
         <h1>Ajouter une image à <?= $don['nom'] ?></h1>
+        <?php 
+            if(isset($_GET['error']))
+            {
+                echo "<div class='alert alert-danger'>Une erreur est survenue (code erreur: ".$_GET['error']." )</div>";
+            }
+        ?>
         <form action="treatmentAddImg.php?id=<?= $idProduct ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="image">Ajouter une image:</label>

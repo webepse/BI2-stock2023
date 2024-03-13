@@ -10,9 +10,10 @@
     // si il y a dans l'url delete
     if(isset($_GET['delete']))
     {
+        $idProd = htmlspecialchars($_GET['delete']);
         // vérifier si l'id qu'on m'a donné existe vraiment 
         $reqdel = $bdd->prepare("SELECT * FROM products WHERE id=?");
-        $reqdel->execute([$_GET['delete']]);
+        $reqdel->execute([$idProd]);
         if(!$dondel = $reqdel->fetch())
         {
             // fermer la requête
@@ -27,11 +28,25 @@
         // supprimer l'image
         unlink("../images/".$dondel['fichier']);
 
+        // supprimer les images (le fichier) de la galerie 
+        $delgal = $bdd->prepare("SELECT * FROM images WHERE id_produit=?");
+        $delgal->execute([$idProd]);
+        while($donDelGal = $delgal->fetch())
+        {
+            unlink("../images/".$donDelGal['fichier']);
+        }
+        $delgal->closeCursor();
+
+        // supprimer les images dans la base de données
+        $delinfoGal = $bdd->prepare("DELETE FROM images WHERE id_produit=?");
+        $delinfoGal->execute([$idProd]);
+        $delinfoGal->closeCursor();
+
         // supprimer le produit 
         $delete = $bdd->prepare("DELETE FROM products WHERE id=?");
-        $delete->execute([$_GET['delete']]);
+        $delete->execute([$idProd]);
         $delete->closeCursor();
-        header("LOCATION:products.php?delsuccess=".$_GET['delete']);
+        header("LOCATION:products.php?delsuccess=".$idProd);
 
 
     }
