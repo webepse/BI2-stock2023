@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 22 fév. 2024 à 10:27
+-- Généré le : mer. 13 mars 2024 à 10:54
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.1.13
 
@@ -82,14 +82,15 @@ CREATE TABLE IF NOT EXISTS `images` (
   `fichier` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `id_produit` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `images`
 --
 
 INSERT INTO `images` (`id`, `fichier`, `id_produit`) VALUES
-(1, 'image1.jpg', 1);
+(1, 'image1.jpg', 1),
+(8, '415024638Alfa-Romeo-Tonale-Concept-01.jpg', 6);
 
 -- --------------------------------------------------------
 
@@ -107,15 +108,15 @@ CREATE TABLE IF NOT EXISTS `products` (
   `date` date NOT NULL,
   `prix` decimal(6,2) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `products`
 --
 
 INSERT INTO `products` (`id`, `nom`, `categorie`, `fichier`, `description`, `date`, `prix`) VALUES
-(1, 'Produit 1', 'test', 'produit.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim commodo finibus. Proin leo urna, accumsan pellentesque scelerisque non, pulvinar eu purus. Cras a nibh quis mi imperdiet dapibus eget eu lorem. Curabitur dapibus viverra dui et dapibus. Nulla id velit diam. Donec in massa et tortor viverra malesuada. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce laoreet, elit nec consequat laoreet, ex diam pretium odio, fermentum condimentum quam erat et nulla. Nam et velit ex. Nulla mi nisl, congue ut dui quis, commodo sagittis urna. Proin tellus tortor, ultrices et viverra nec, vulputate in justo. Vestibulum sem lectus, eleifend et urna vel, elementum sagittis sem. ', '2023-12-02', '99.00'),
-(2, 'produit 2', 'test', 'produit2.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim commodo finibus. Proin leo urna, accumsan pellentesque scelerisque non, pulvinar eu purus. Cras a nibh quis mi imperdiet dapibus eget eu lorem. Curabitur dapibus viverra dui et dapibus. Nulla id velit diam. Donec in massa et tortor viverra malesuada. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce laoreet, elit nec consequat laoreet, ex diam pretium odio, fermentum condimentum quam erat et nulla. Nam et velit ex. Nulla mi nisl, congue ut dui quis, commodo sagittis urna. Proin tellus tortor, ultrices et viverra nec, vulputate in justo. Vestibulum sem lectus, eleifend et urna vel, elementum sagittis sem. ', '2023-12-02', '55.00');
+(1, 'Produit 1', 'test', 'produit.jpg', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer dignissim commodo finibus. Proin leo urna, accumsan pellentesque scelerisque non, pulvinar eu purus. Cras a nibh quis mi imperdiet dapibus eget eu lorem. Curabitur dapibus viverra dui et dapibus. Nulla id velit diam. Donec in massa et tortor viverra malesuada. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce laoreet, elit nec consequat laoreet, ex diam pretium odio, fermentum condimentum quam erat et nulla. Nam et velit ex. Nulla mi nisl, congue ut dui quis, commodo sagittis urna. Proin tellus tortor, ultrices et viverra nec, vulputate in justo. Vestibulum sem lectus, eleifend et urna vel, elementum sagittis sem. \r\n\r\n<a href=\'https://www.epse.be\'>lien EPSE</a>\r\n', '2023-12-02', '99.00'),
+(7, 'Produit 2', 'categorie1', '1359163479design-header.jpg', 'test', '2024-03-13', '50.00');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
