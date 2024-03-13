@@ -137,7 +137,8 @@
                         <input type="submit" value="Modifier" class="btn btn-warning">
                     </div>
                 </div>
-                <div class="col-md-8 offset-md-2">
+                <hr>
+                <div class="col-md-12">
                     <h1>Galerie images</h1>
                     <?php
                         if(isset($_GET['add']))
@@ -149,41 +150,45 @@
                             echo "<div class='alert alert-danger'>Vous avez bien supprimé l'image id: ".$_GET['delsuccess']."</div>";
                         }
                     ?>
-                    <a href="addGalimg.php?id=<?= $don['id'] ?>" class='btn btn-primary'>Ajouter une image</a>
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>id</th>
-                                <th>image</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php 
-                                $gal = $bdd->prepare("SELECT * FROM images WHERE id_produit=?");
-                                $gal->execute([$id]);
-                                // tester si j'ai des images ou non
-                                $count = $gal->rowCount();
-                                if($count > 0)
-                                {
-                                    while($donGal = $gal->fetch())
-                                    {
-                                        echo "<tr>";
-                                            echo "<td>".$donGal['id']."</td>";
-                                            echo "<td><img src='../images/".$donGal['fichier']."' alt='image de galerie ".$don['nom']."' class='col-2 img-fluid'></td>";
-                                            echo "<td>";
-                                                echo "<a href='#' class='btn btn-warning me-2'>Modifier</a>";
-                                                echo "<a href='updateProduct.php?id=".$id."&delete=".$donGal['id']."' class='btn btn-danger'>Supprimer</a>";
-                                            echo "</td>";
-                                        echo "</tr>";
-                                    }
-                                }else{
-                                    echo "<p>Aucune images associées</p>";
-                                }
-                                $gal->closeCursor();
-                            ?>
-                        </tbody>
-                    </table>
+                    <div class="row">
+                        <a href="addGalimg.php?id=<?= $don['id'] ?>" class='btn btn-primary'>Ajouter une image</a>
+                        <div class="col-md-8 offset-2">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>id</th>
+                                        <th>image</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php 
+                                        $gal = $bdd->prepare("SELECT * FROM images WHERE id_produit=?");
+                                        $gal->execute([$id]);
+                                        // tester si j'ai des images ou non
+                                        $count = $gal->rowCount();
+                                        if($count > 0)
+                                        {
+                                            while($donGal = $gal->fetch())
+                                            {
+                                                echo "<tr>";
+                                                    echo "<td>".$donGal['id']."</td>";
+                                                    echo "<td><img src='../images/".$donGal['fichier']."' alt='image de galerie ".$don['nom']."' class='col-2 img-fluid'></td>";
+                                                    echo "<td>";
+                                                        echo "<a href='#' class='btn btn-warning me-2'>Modifier</a>";
+                                                        echo "<a href='updateProduct.php?id=".$id."&delete=".$donGal['id']."' class='btn btn-danger'>Supprimer</a>";
+                                                    echo "</td>";
+                                                echo "</tr>";
+                                            }
+                                        }else{
+                                            echo "<p>Aucune images associées</p>";
+                                        }
+                                        $gal->closeCursor();
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div> 
         </form>
