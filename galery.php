@@ -46,15 +46,22 @@
                 }else{
                     $req = $bdd->prepare("SELECT * FROM products WHERE categorie=? ORDER BY id ASC");
                     $req->execute([$choice]);
-                    while($don = $req->fetch())
+                    $count = $req->rowCount();
+                    if($count > 0)
                     {
-                        echo "<div class='col-md-3'>";
-                            echo "<img src='images/".$don['fichier']."' class='img-fluid' />";
-                            echo "<div class='title'>".$don['nom']."</div>";
-                            echo "<a href='show.php?id=".$don['id']."' class='btn btn-primary'>Voir plus</a>";
-                        echo "</div>";
+                        while($don = $req->fetch())
+                        {
+                            echo "<div class='col-md-3'>";
+                                echo "<img src='images/".$don['fichier']."' class='img-fluid' />";
+                                echo "<div class='title'>".$don['nom']."</div>";
+                                echo "<a href='show.php?id=".$don['id']."' class='btn btn-primary'>Voir plus</a>";
+                            echo "</div>";
+                        }
+                        $req->closeCursor();
+                    }else{
+                        $req->closeCursor();
+                        echo "Aucun produit pour cette catégorie";
                     }
-                    $req->closeCursor();
                 }
             ?>
         </div>
