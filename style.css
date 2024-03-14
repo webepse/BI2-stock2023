@@ -19,3 +19,16 @@
     height: 200px !important;
     resize: none !important;
 }
+
+#carouselExample{
+    width: 100%;
+    height: 40vh;
+    background-color: black;
+}
+
+#carouselExample img{
+    width: 100%;
+    height: 40vh;
+    object-fit: contain;
+   
+}

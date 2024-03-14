@@ -175,7 +175,6 @@
                                                     echo "<td>".$donGal['id']."</td>";
                                                     echo "<td><img src='../images/".$donGal['fichier']."' alt='image de galerie ".$don['nom']."' class='col-2 img-fluid'></td>";
                                                     echo "<td>";
-                                                        echo "<a href='#' class='btn btn-warning me-2'>Modifier</a>";
                                                         echo "<a href='updateProduct.php?id=".$id."&delete=".$donGal['id']."' class='btn btn-danger'>Supprimer</a>";
                                                     echo "</td>";
                                                 echo "</tr>";

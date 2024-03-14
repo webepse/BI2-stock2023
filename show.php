@@ -45,27 +45,39 @@
         <div><strong>Prix:</strong> <?= $don['prix'] ?>€</div>
         <h2 class="my-3">Galerie Image</h2>
         <div class="row">
-            <?php 
-                $gal = $bdd->prepare("SELECT * FROM images WHERE id_produit=?");
-                $gal->execute([$id]);
-                // tester si j'ai des images ou non
-                $count = $gal->rowCount();
-                if($count > 0)
-                {
-                    while($donGal = $gal->fetch())
-                    {
-                        echo "<div class='col-md-3'>";
-                            echo "<a href='images/".$donGal['fichier']."'>";
-                                echo "<img src='images/".$donGal['fichier']."' alt='image de galerie ".$don['nom']."' class='img-fluid'>";
-                            echo "</a>";
-                        echo "</div>";
-                    }
-                }else{
-                    echo "<p>Aucune images associées</p>";
-                }
-                $gal->closeCursor();
 
-            ?>
+        <div id="carouselExample" class="carousel slid">
+            <div class="carousel-inner">
+                <?php 
+                    $gal = $bdd->prepare("SELECT * FROM images WHERE id_produit=?");
+                    $gal->execute([$id]);
+                    // tester si j'ai des images ou non
+                    $count = $gal->rowCount();
+                    if($count > 0)
+                    {
+                        while($donGal = $gal->fetch())
+                        {
+                            echo "<div class='carousel-item active'>";  
+                                echo "<img src='images/".$donGal['fichier']."' alt='image de galerie ".$don['nom']."' class='d-block w-100'>";
+                            echo "</div>";
+                        }
+                    }else{
+                        echo "<p>Aucune images associées</p>";
+                    }
+                    $gal->closeCursor();
+
+                ?>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+           
         </div>
     </div>
 </body>
