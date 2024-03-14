@@ -29,6 +29,23 @@
 </head>
 <body>
     <div class="container-fluid">
+        <h1>Galerie</h1>
+        <a href="index.php" class="btn btn-secondary my-3">Retour</a>
+        <a href="galery.php" class="btn btn-primary mx-2">Tout</a>
+        <a href="galery.php?category=categorie1" class="btn btn-primary mx-2">Catégorie 1</a>
+        <a href="galery.php?category=categorie2" class="btn btn-primary mx-2">Catégorie 2</a>
+        <a href="galery.php?category=categorie3" class="btn btn-primary mx-2">Catégorie 3</a>
+
+
+        <?php
+            if($choice == "all")
+            {
+                echo "<h1>Toutes les catégories</h1>";
+            }else{
+                echo "<h1>".$choice."</h1>";
+            }
+
+        ?>
         <div class="row">
             <?php
                 if($choice == "all")

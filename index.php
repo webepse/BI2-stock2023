@@ -32,6 +32,7 @@
     
                 ?>
             </div>
+            <a href="galery.php" class="btn btn-secondary my-5">Voir tous les produits</a>
         </div>
         
         <div class="slide" id="contact">
