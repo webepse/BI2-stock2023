@@ -12,6 +12,8 @@
         session_destroy();
         header("LOCATION:index.php?deco=success");
     }
+
+
 ?>
 
 
@@ -30,8 +32,34 @@
         include("partials/header.php");
     ?>
     <div class="container-fluid">
-     
-       
+     <div class="row">
+        <div class="col-md-4 text-center bg-dark text-white">
+            <div class="row">
+                <div class="col-12">Nombre de produits</div>
+                <div class="col-12">
+                    <?php
+                        $prod = $bdd->query("SELECT id FROM products");
+                        $countProd = $prod->rowCount();
+                        $prod->closeCursor();
+                        echo $countProd;
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-center bg-warning text-white">
+            <div class="row">
+                <div class="col-12">Nombre de message</div>
+                <div class="col-12">
+                    <?php
+                        $contact = $bdd->query("SELECT id FROM contact");
+                        $countContact = $contact->rowCount();
+                        $contact->closeCursor();
+                        echo $countContact;
+                    ?>
+                </div>
+            </div>
+        </div>
+     </div>
     </div>
     <?php include('partials/footer.php'); ?>
 </body>
