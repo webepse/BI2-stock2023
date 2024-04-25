@@ -42,7 +42,7 @@
         // insertion du header
         include("partials/header.php");
     ?>
-    <div class="container">
+    <div class="container h100">
         <h2>Message de <?= $don['nom'] ?></h2>
         <h5>Envoyé le <?= $don['mydate'] ?></h5>
         <div>Sujet: <?= $don['sujet'] ?></div>

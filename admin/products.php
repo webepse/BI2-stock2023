@@ -66,7 +66,7 @@
     <?php
         include("partials/header.php");
     ?>
-    <div class="container-fluid">
+    <div class="container-fluid h100">
      <h2>Gestion des produits</h2>
      <a href="addProduct.php" class="btn btn-primary">Ajouter un produit</a>
      <?php 

@@ -41,7 +41,7 @@
     <?php
         include("partials/header.php");
     ?>
-    <div class="container slide">
+    <div class="container slide h100">
         <h1>Ajouter une image à <?= $don['nom'] ?></h1>
         <?php 
             if(isset($_GET['error']))

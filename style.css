@@ -32,3 +32,15 @@
     object-fit: contain;
    
 }
+
+.navbar{
+    min-height: 10vh;
+}
+
+.h100{
+    min-height: 80vh;
+}
+
+footer{
+    min-height: 10vh;
+}

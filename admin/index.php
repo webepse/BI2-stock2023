@@ -64,7 +64,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid h100">
        <h1>Admin</h1>
        <div class="col-6 offset-3 bg-light p-5">
             <?php

@@ -45,7 +45,7 @@
     <?php
         include("partials/header.php");
     ?>
-    <div class="container-fluid">
+    <div class="container-fluid h100">
      <h2>Gestion des contact</h2>
     <?php
         if(isset($_GET['delerror']))

@@ -31,7 +31,13 @@
     <?php
         include("partials/header.php");
     ?>
-    <div class="container-fluid">
+    <div class="container-fluid h100">
+    <div class="row my-5">
+        <div class="col-md-4 offset-md-4">
+            <h1>Logo du site</h1>
+        </div>
+    </div>
+
      <div class="row">
         <div class="col-md-4 text-center bg-dark text-white">
             <div class="row">

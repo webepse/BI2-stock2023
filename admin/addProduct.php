@@ -20,7 +20,7 @@
     <?php
         include("partials/header.php");
     ?>
-    <div class="container">
+    <div class="container h100">
         <h2>Ajouter un produit</h2>
         <a href="products.php" class='btn btn-secondary'>Retour</a>
         <?php
