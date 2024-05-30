@@ -50,7 +50,7 @@
             <?php
                 if($choice == "all")
                 {
-                    $req = $bdd->query("SELECT * FROM products ORDER BY id ASC");
+                    $req = $bdd->query("SELECT * FROM products ORDER BY date DESC");
                     while($don = $req->fetch())
                     {
                         echo "<div class='col-md-3'>";
@@ -61,7 +61,7 @@
                     }
                     $req->closeCursor();
                 }else{
-                    $req = $bdd->prepare("SELECT * FROM products WHERE categorie=? ORDER BY id ASC");
+                    $req = $bdd->prepare("SELECT * FROM products WHERE categorie=? ORDER BY date DESC");
                     $req->execute([$choice]);
                     $count = $req->rowCount();
                     if($count > 0)
